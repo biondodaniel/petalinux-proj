@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote name="tfo" fetch="https://git.trustedfirmware.org" />
+    <remote name="u-boot" fetch="https://source.denx.de/u-boot" />
+    <remote name="xilinx" fetch="https://github.com/Xilinx" />
+    
+    <!-- Common elements -->
+    <include name="common.xml" />
+
+    <!-- OP-TEE build system -->
+    <project path="build" name="OP-TEE/build.git" revision="refs/tags/4.3.0" clone-depth="1">
+        <linkfile src="zynqmp.mk" dest="build/Makefile" />
+    </project>
+
+    <!-- Xilinx specific projects for Zynq MPSoC -->
+    <project path="arm-trusted-firmware" name="Xilinx/arm-trusted-firmware" />
+    <project path="u-boot-xlnx" name="Xilinx/u-boot-xlnx" revision="refs/tags/xilinx-v2021.1"/>
+    <project path="linux-xlnx" name="Xilinx/linux-xlnx" revision="refs/tags/xilinx-v2021.1"/>
+    <project path="bootgen" name="Xilinx/bootgen" revision="refs/tags/xilinx_v2021.1"/>
+
+    <!-- Hafnium, for trusted execution environment -->
+    <project path="hafnium" name="hafnium/hafnium.git" revision="refs/tags/v2.10" clone-depth="1" remote="tfo" />
+
+    <!-- Mbed TLS for cryptographic libraries -->
+    <project path="mbedtls" name="Mbed-TLS/mbedtls.git" revision="refs/tags/mbedtls-3.4.0" />
+    
+    <!-- fTPM implementation from Microsoft -->
+    <project path="ms-tpm-20-ref" name="microsoft/ms-tpm-20-ref" revision="98b60a44aba79b15fcce1c0d1e46cf5918400f6a" />
+
+    <!-- Remove Linaro specific Linux project (if needed) -->
+    <remove-project name="linaro-swg/linux.git" />
+</manifest>
